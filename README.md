@@ -1,4 +1,4 @@
-Energy Data Analysis Project
+# Energy Data Analysis Project
 
 Project for DSC 80 at UCSD
 
