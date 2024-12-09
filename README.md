@@ -15,3 +15,13 @@ Although there are multiple columns in the data that contain missing values, one
 
 In order to see if the data is actually Missing at Random (MAR), I would collect the date in which the data of the climate region for the outage was published, and then conduct analysis to see if the missingness of the climate region is MAR dependent on when the data was published.
 
+
+
+## Hypothesis Testing
+Here is my empirical distribution:
+<iframe
+  src="assets/hypo_test_plot.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
