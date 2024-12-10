@@ -19,6 +19,7 @@ In order to see if the data is actually Missing at Random (MAR), I would collect
 
 ## Hypothesis Testing
 Here is my empirical distribution:
+
 <iframe
   src="assets/hypo_test_plot.html"
   width="800"
