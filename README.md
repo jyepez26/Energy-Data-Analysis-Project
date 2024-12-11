@@ -35,7 +35,6 @@ The original DataFrame contains 1534 rows, each corresponding to a unique outage
 | `'TOTAL.PRICE'`           | Average electricity price in the state (cents/kWh)                      |
 | `'TOTAL.SALES'`           | Total electricity consumption in the state (MWh)                        |
 | `'RES.SALES'`             | Electricity consumption in the residential sector                       |
-| `'TOTAL.CUSTOMERS'`       | Total number of customers in the state annually                         |
 | `'POPPCT_URBAN'`          | Percentage of the state's population living in urban areas              |
 
 
