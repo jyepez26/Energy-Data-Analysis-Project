@@ -4,6 +4,16 @@ Project for DSC 80 at UCSD
 By Jonathan Yepez
 
 ## Introduction
+Throughout this project, I explored a dataset on major power outages in different states throughout the U.S. containing data from January 2000-July 2016. The dataset, containing fifty-five total variables, was accessed from Purdue University’s Laboratory on Advances in Sustainable Infrastructure, at the url https://engineering.purdue.edu/LASCI/research-data/outages/outagerisks. This dataset can be used to recognize and explore trends and patterns of the major outages in the U.S. as well as to identify and assess the risk predictors associated with varying power outages. The data also provide characteristics of the states in the U.S., including their climate and topographical characteristics, electricity consumption patterns, population, economic characteristics, and land-cover characteristics. 
+
+I will begin my research by cleaning my dataset and performing exploratory data analysis to gain a better understanding of the data I am working with and some basic patterns. After this, I will move on to assess the missingness of values in the data and then conduct a hypothesis test to explore equity among distributions.
+
+Next, I will analyze my research question. Personally, I am heavily interested in economics and how important it is to our country. Therefore, I wanted to learn more about how the economic factors play a part in the power outages in this country and how that knowledge can be used to help develop better infrastructure and economic structures to reduce or better predict outages.
+
+Therefore, my research question is: how do economic and geographic factors impact the causes and properties of power outages in the United States? First, I will conduct a hypothesis test to explore economic equity among distributions. Lastly, I will create a model that predicts the cause of a power outage based on economic, geographic, and demographic information.
+
+The original DataFrame contains 1534 rows, each corresponding to a unique outage, and 57 columns containing features. Throughout my analysis, I will only focus on a subset of the columns that will be important to my research.
+
 ```
 Here is some cool code!
 ```
