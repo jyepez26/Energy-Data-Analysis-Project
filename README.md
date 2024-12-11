@@ -14,21 +14,60 @@ Therefore, my research question is: how do economic and geographic factors impac
 
 The original DataFrame contains 1534 rows, each corresponding to a unique outage, and 57 columns containing features. Throughout my analysis, I will only focus on a subset of the columns that will be important to my research.
 
+| Column                    | Description                                                              |
+|---------------------------|--------------------------------------------------------------------------|
+| `'YEAR'`                  | Year of the outage                                                      |
+| `'MONTH'`                 | Month of the outage                                                     |
+| `'POSTAL.CODE'`           | State where the outage occurred                                         |
+| `'CLIMATE.REGION'`        | U.S. Climate region (defined by the National Centers for Environmental Information) |
+| `'CLIMATE.CATEGORY'`      | Climate episodes corresponding to the years. Based on a threshold of ± 0.5 °C for the Oceanic Niño Index (ONI) |
+| `'ANOMALY.LEVEL'`         | Oceanic El Niño/La Niña index for seasonal cold and warm episodes       |
+| `'OUTAGE.START.DATE'`     | Day of the year when the outage began                                   |
+| `'OUTAGE.START.TIME'`     | Time of day when the outage began                                       |
+| `'OUTAGE.RESTORATION.DATE'` | Day of the year when power was fully restored                         |
+| `'OUTAGE.RESTORATION.TIME'` | Time of day when power was fully restored                             |
+| `'CAUSE.CATEGORY'`        | Event category causing the outage                                       |
+| `'OUTAGE.DURATION'`       | Duration of the outage (in minutes)                                     |
+| `'DEMAND.LOSS.MW'`        | Peak demand lost during the outage (in MW)                              |
+| `'CUSTOMERS.AFFECTED'`    | Number of customers impacted by the outage                              |
+| `'PC.REALGSP.STATE'`      | Per capita real gross state product (GSP) in the U.S. state             |
+| `'TOTAL.REALGSP'`         | Real GSP (measurement of state's output) contributed by all industries  |
+| `'TOTAL.PRICE'`           | Average electricity price in the state (cents/kWh)                      |
+| `'TOTAL.SALES'`           | Total electricity consumption in the state (MWh)                        |
+| `'RES.SALES'`             | Electricity consumption in the residential sector                       |
+| `'TOTAL.CUSTOMERS'`       | Total number of customers in the state annually                         |
+| `'POPPCT_URBAN'`          | Percentage of the state's population living in urban areas              |
+
+
 ```
 Here is some cool code!
 ```
 ## Data Cleaning and Exploratory Data Analysis
 ### Data Cleaning
 The first step in my research is to clean the data, ensuring that it is formatted appropriately for proper exploration and analysis.
+
 Step 1:
+
 After reading the excel file into a pandas dataframe, the format was messy–containing empty rows and meaningless column names. Therefore, I removed the empty rows and changed the column headers to their correct names. There was an additional row that included the units of each columns’ values, which I removed but stored in a dictionary to potentially use later. I then dropped all the columns that were not relevant, accounting for redundant information, only keeping the ones that I will be using in my research: 
 `TOTAL.PRICE`, `CAUSE.CATEGORY`, `PC.REALGSP.STATE`, `POSTAL.CODE`, `TOTAL.SALES`, `OUTAGE.DURATION`, `CLIMATE.REGION`, `CLIMATE.CATEGORY`, `TOTAL.REALGSP`, `CUSTOMERS.AFFECTED`, `DEMAND.LOSS.MW`, `POPPCT_URBAN`, `RES.SALES`, `MONTH`, `YEAR`, `OUTAGE.START.DATE`,`OUTAGE.START.TIME`, `OUTAGE.RESTORATION.TIME`, `OUTAGE.RESTORATION.DATE`, `ANOMALY.LEVEL`.
 
 Step 2:
+
 My next step was to create a single column for `OUTAGE.START` and `OUTAGE.RESTORATION`. To do this, I combined the values `OUTAGE.START.DATE` and the `OUTAGE.START.TIME` columns into Timestamp objects and saved them to a new column called `OUTAGE.START`. I repeat this same process to combine `OUTAGE.RESTORATION.DATE` and `OUTAGE.RESTORATION.TIME` into one column of Timestamp objects called `OUTAGE.RESTORATION`. I then dropped the original two columns, as their values are now stored in the combined columns. This step allows for easier access and utilization of the start and restoration values for outages. 
 
 Step 3:
+
 My last step was to check the extent of outages columns, `OUTAGE.DURATION`, `CUSTOMERS.AFFECTED`, and `DEMAND.LOSS.MW`, for values of 0. It is very unlikely that any of these values will be reported zero, as a power outage will have to last some duration of time, which in turn leads to peak demand being lost and customers being impacted. Therefore, a value of 0 in these features would be suggestive of a missing value, and I will replace these values with np.nan instead.
+
+The first few rows of the cleaned dataframe, titled "outages", are showed below:
+| **YEAR** | **MONTH** | **POSTAL.CODE** | **OUTAGE.START**      | **OUTAGE.RESTORATION** | **OUTAGE.DURATION** | **CUSTOMERS.AFFECTED** | **DEMAND.LOSS.MW** | **ANOMALY.LEVEL** | **CLIMATE.REGION**     | **CLIMATE.CATEGORY** | **CAUSE.CATEGORY**    | **PC.REALGSP.STATE** | **TOTAL.SALES** | **TOTAL.PRICE** | **TOTAL.REALGSP** | **POPPCT_URBAN** | **RES.SALES** |
+|----------|-----------|-----------------|-----------------------|------------------------|---------------------|-----------------------|--------------------|-------------------|-----------------------|----------------------|----------------------|----------------------|-----------------|-----------------|-------------------|------------------|--------------|
+| 2011     | 7         | MN              | 2011-07-01 17:00:00   | 2011-07-03 20:00:00    | 3060                | 70000                 | NaN                | -0.3              | East North Central     | normal               | severe weather       | 51268                | 6562520         | 9.28            | 274182            | 73.27            | 2332915     |
+| 2014     | 5         | MN              | 2014-05-11 18:38:00   | 2014-05-11 18:39:00    | 1                   | NaN                   | NaN                | -0.1              | East North Central     | normal               | intentional attack   | 53499                | 5284231         | 9.28            | 291955            | 73.27            | 1586986     |
+| 2010     | 10        | MN              | 2010-10-26 20:00:00   | 2010-10-28 22:00:00    | 3000                | 70000                 | NaN                | -1.5              | East North Central     | cold                 | severe weather       | 50447                | 5222116         | 8.15            | 267895            | 73.27            | 1467293     |
+| 2012     | 6         | MN              | 2012-06-19 04:30:00   | 2012-06-20 23:00:00    | 2550                | 68200                 | NaN                | -0.1              | East North Central     | normal               | severe weather       | 51598                | 5787064         | 9.19            | 277627            | 73.27            | 1851519     |
+| 2015     | 7         | MN              | 2015-07-18 02:00:00   | 2015-07-19 07:00:00    | 1740                | 250000                | 250                | 1.2               | East North Central     | warm                 | severe weather       | 54431                | 5970339         | 10.43           | 292023            | 73.27            | 2028875     |
+
 
 ### Exploratory Data Analysis
 #### UNIVARIATE ANALYSIS
