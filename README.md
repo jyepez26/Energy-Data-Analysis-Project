@@ -59,6 +59,7 @@ Step 3:
 My last step was to check the extent of outages columns, `OUTAGE.DURATION`, `CUSTOMERS.AFFECTED`, and `DEMAND.LOSS.MW`, for values of 0. It is very unlikely that any of these values will be reported zero, as a power outage will have to last some duration of time, which in turn leads to peak demand being lost and customers being impacted. Therefore, a value of 0 in these features would be suggestive of a missing value, and I will replace these values with np.nan instead.
 
 The first few rows of the cleaned dataframe, titled "outages", are showed below:
+
 | **YEAR** | **MONTH** | **POSTAL.CODE** | **OUTAGE.START**      | **OUTAGE.RESTORATION** | **OUTAGE.DURATION** | **CUSTOMERS.AFFECTED** | **DEMAND.LOSS.MW** | **ANOMALY.LEVEL** | **CLIMATE.REGION**     | **CLIMATE.CATEGORY** | **CAUSE.CATEGORY**    | **PC.REALGSP.STATE** | **TOTAL.SALES** | **TOTAL.PRICE** | **TOTAL.REALGSP** | **POPPCT_URBAN** | **RES.SALES** |
 |----------|-----------|-----------------|-----------------------|------------------------|---------------------|-----------------------|--------------------|-------------------|-----------------------|----------------------|----------------------|----------------------|-----------------|-----------------|-------------------|------------------|--------------|
 | 2011     | 7         | MN              | 2011-07-01 17:00:00   | 2011-07-03 20:00:00    | 3060                | 70000                 | NaN                | -0.3              | East North Central     | normal               | severe weather       | 51268                | 6562520         | 9.28            | 274182            | 73.27            | 2332915     |
@@ -137,16 +138,24 @@ Although there are multiple columns in the data that contain missing values, one
 
 In order to see if the data is actually Missing at Random (MAR), I would collect the date in which the data of the climate region for the outage was published, and then conduct analysis to see if the missingness of the climate region is MAR dependent on when the data was published.
 
-### MAR Analysis
-MAR ANALYSIS OF DEMAND LOSS VS. CLIMATE CATEGORY (Not MAR Dependent)
-Proportion Plot:
+### Missingess Dependency
+To test missingness dependency, I am going to focus on the peak demand loss during an outage, `DEMAND.LOSS.MW`. I will be testing these values against the `CLIMATE.CATEGORY` and `CLIMATE.REGION` columns.
+
+MAR Analysis of `DEMAND.LOSS.MW` VS. `CLIMATE.CATEGORY`:
+
+First, I chose to look at the distribution of CLIMATE.CATEGORY when demand loss is missing and not missing.
+Null Hypothesis: The distribution of the climate category column is the same when peak demand loss is missing and when it is not missing.
+Alternate Hypothesis: The distribution of the climate category column is different when peak demand loss is missing and when it is not missing.
+
 <iframe
   src="assets/demand_vs_climate_category_proportions.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
-Empirical Distribution Plot:
+
+I found an observed TVD of 0.03, which has a p value of 0.55. The empirical distribution of the TVDs is shown in the plot below. At this p value, I fail to reject the null hypothesis, as it is not close to a statistically significant p value of 0.05. Based on the empirical distribution, you can clearly see that our observed TVD is a normal value to be observed, and therefore we cannot reject the null hypothesis that the distribution of the climate category column is the same when peak demand loss is missing and when it is not missing.
+
 <iframe
   src="assets/demand_vs_climate_category_emp_dist.html"
   width="800"
@@ -154,8 +163,18 @@ Empirical Distribution Plot:
   frameborder="0"
 ></iframe>
 
-MAR ANALYSIS OF DEMAND LOSS VS. CLIMATE REGION (MAR Dependent)
+
+
+MAR Analysis of `DEMAND.LOSS.MW` VS. `CLIMATE.REGION`:
+
+Next, I decided to look at the distribution of CLIMATE.REGION when demand loss is missing and not missing.
+Null Hypothesis: The distribution of the climate region column is the same when peak demand loss is missing and when it is not missing.
+Alternate Hypothesis: The distribution of the climate region column is different when peak demand loss is missing and when it is not missing.
+
+Below, I plotted the Proportion Plot Simulated Under the Null Hypothesis and the Observed Proportion Plot. If you pay attention to the West Region, there is a significant difference between the two distributions.
+
 Proportion Plot Simulated Under the Null Hypothesis:
+
 <iframe
   src="assets/region_vs_demand_random_missing.html"
   width="800"
@@ -163,13 +182,16 @@ Proportion Plot Simulated Under the Null Hypothesis:
   frameborder="0"
 ></iframe>
 Observed Proportion Plot:
+
 <iframe
   src="assets/region_vs_demand_mar_missing.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
-Empirical Distribution Plot:
+
+I found an observed TVD of 0.23, which has a p value of 0.0. The empirical distribution of the TVDs is shown in the plot below. At this p value, I am able to reject the null hypothesis, as 0.0 is a statistically significant p value. Therefore, we reject that the distribution of the climate region column is the same when peak demand loss is missing and when it is not missing.
+
 <iframe
   src="assets/region_vs_climate_emp_dist.html"
   width="800"
@@ -177,8 +199,23 @@ Empirical Distribution Plot:
   frameborder="0"
 ></iframe>
 
+
 ## Hypothesis Testing
-Here is my empirical distribution:
+In this hypothesis test, I will be testing whether the outage duration is greater on average in a state where the GSP is below the median. The relevant columns for this hypothesis test are `OUTAGE.DURATION` and `PC.REALGSP.STATE`.
+
+**NULL HYPOTHESIS**: On average, the duration of an outage in a state where the Per Capita GSP (Gross State Product) is larger than or equal to $48370 (the median of all GSPs), is the same as the duration of an outage in a state where the Per Capita GSP is less than $48370.
+
+**ALTERNATE HYPOTHESIS**: On average, the duration of an outage in a state where the Per Capita GSP (Gross State Product) is larger than $48370 (the median of all GSPs), is shorter as the duration of an outage in a state where the Per Capita GSP is less than $48370.
+
+**TEST STATISTIC**: Difference in Means (Mean Outage Duration where GSP >= 48370 - Mean Outage Duration where GSP < 48370
+
+I performed a permutation test with 500 simulations (increasing past this threshold did not change the results), to create an empirical distribution of my test statistic generated under the null hypothesis.
+
+I achieved a p value of 0.0, which is statistically significant, and therefore I rejected the null hypothesis. From these results we can conclude that most likely on average, the duration of an outage where the Per Capita Gross State Product is in the lower 50%, will be longer than its counterpart. 
+
+From an economic standpoint, I find this discovery very interesting, as it demonstrates that lower economic power in the area where the outage occurs can actually have a negative impact on how destructive the power outage is. Earlier on, we failed to see this pattern, so it is exciting that we can see the pattern actually does exist when you dig deeper into the data!
+
+Below, you can see the plot of the empirical distribution of the test statistic from the hypothesis test I conducted.
 
 <iframe
   src="assets/updated_hypo_test_plot.html"
@@ -186,3 +223,6 @@ Here is my empirical distribution:
   height="600"
   frameborder="0"
 ></iframe>
+
+## Framing a Prediction Problem
+
