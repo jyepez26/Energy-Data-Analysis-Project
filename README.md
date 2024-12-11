@@ -68,7 +68,8 @@ The first few rows of the cleaned dataframe, titled "outages", are showed below:
 
 
 ### Exploratory Data Analysis
-#### UNIVARIATE ANALYSIS
+
+### Univariate Analysis
 To begin my exploratory data analysis, I performed a univariate analysis to understand the distributions of certain single properties.
 
 I first wanted to see how many outages there were of each cause category, to see which were the most and least common causes.
@@ -95,9 +96,8 @@ I then wanted to see how the average total electricity price varied among the di
   frameborder="0"
 ></iframe>
 
----
 
-#### Bivariate Analysis
+### Bivariate Analysis
 For the next step in my exploratory data analysis, I conducted a bivariate analysis in order to examine how certain variables impact each other and take note of any patterns.
 
 To continue to explore various economic characteristics, I wanted to see how the per capita real gross state product–a state’s total output measured per person–varied among different states. There was a notable difference between Washington D.C. and every other state, which stems from the miniscule population size, low variance, and the government’s actions counting as contributions to their GSP.
@@ -116,9 +116,8 @@ Next, I was interested to see how the number of customers affected by an outage 
   frameborder="0"
 ></iframe>
 
----
 
-#### Aggregation
+### Aggregation
 For the aggregation, I wanted to begin to explore some geographical features. Therefore, I created a pivot table which aggregated the mean Outage Duration based on the Climate Region and the Cause Category. More simply, this pivot table shows the average duration of outages in each climate region for each cause category.
 
 | `CLIMATE.REGION`    | **equipment failure** | **fuel supply emergency** | **intentional attack** | **islanding** | **public appeal** | **severe weather** | **system operability disruption** |
@@ -134,7 +133,6 @@ For the aggregation, I wanted to begin to explore some geographical features. Th
 | **West North Central** | 61                    | NaN                       | 47                     | 68.2          | 439.5             | 2,442.5            | NaN                              |
 
 
----
 
 ## Assesment of Missingness
 ### NMAR Analysis
