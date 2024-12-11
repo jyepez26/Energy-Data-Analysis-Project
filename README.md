@@ -88,6 +88,12 @@ Then, I wanted to see the average total electricity price across all outages to 
 ></iframe>
 
 I then wanted to see how the average total electricity price varied among the different states. *The black states have too few values to have a proper density.
+<iframe
+  src="assets/fairness_plot.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 ---
 
@@ -268,5 +274,11 @@ Alternative Hypothesis: The model is unfair. Its accuracy score for higher anoma
 I performed a permutation test with 500 trials. My significance level is the standard 0.05, and I got a p_value of around 0.5 so I fail to reject the null hypothesis. Therefore, my model is fair between higher and lower anomaly levels.
 
 The figure below shows the distribution of the statistic.
+<iframe
+  src="assets/fairness_plot.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 
