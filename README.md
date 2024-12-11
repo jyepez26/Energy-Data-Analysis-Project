@@ -37,7 +37,7 @@ The original DataFrame contains 1534 rows, each corresponding to a unique outage
 | `'RES.SALES'`             | Electricity consumption in the residential sector                       |
 | `'POPPCT_URBAN'`          | Percentage of the state's population living in urban areas              |
 
-
+---
 
 ## Data Cleaning and Exploratory Data Analysis
 ### **Data Cleaning**
@@ -133,6 +133,7 @@ For the aggregation, I wanted to begin to explore some geographical features. Th
 | **West North Central** | 61                    | NaN                       | 47                     | 68.2          | 439.5             | 2,442.5            | NaN                              |
 
 
+---
 
 ## Assesment of Missingness
 ### NMAR Analysis
@@ -201,6 +202,7 @@ I found an observed TVD of 0.23, which has a p value of 0.0. The empirical distr
   frameborder="0"
 ></iframe>
 
+---
 
 ## Hypothesis Testing
 In this hypothesis test, I will be testing whether the outage duration is greater on average in a state where the GSP is below the median. The relevant columns for this hypothesis test are `OUTAGE.DURATION` and `PC.REALGSP.STATE`.
@@ -226,6 +228,8 @@ Below, you can see the plot of the empirical distribution of the test statistic 
   frameborder="0"
 ></iframe>
 
+---
+
 ## Framing a Prediction Problem
 My model will be developed to predict the cause of a power outage. This will be a decision tree classification because we are trying to predict any of the different outages cause categories.
 
@@ -233,6 +237,7 @@ The metric I am using to evaluate my model is the accuracy, because it gives a s
 
 At the time of prediction, we will know the `CLIMATE.REGION`,`RES.SALES`,`OUTAGE.DURATION`,`CUSTOMERS.AFFECTED`, `MONTH`,`POPPCT_URBAN`,`TOTAL.PRICE`. This information will allow us to predict what the cause of a major power outage is.
 
+---
 
 ## Baseline Model
 My model is a decision tree classifier using the features climate region, res sales, outage duration, poppct_urban to predict the cause of a major outage. This information would provide economists and policymakers with information on how certain geographical and economic factors impact the outages in their area.
@@ -242,6 +247,8 @@ The features are: `CLIMATE.REGION` (nominal), `RES.SALES` (quantitative), `OUTAG
 I used One Hot Encoding to convert the Climate Region to a quantitative column.
 
 The performance of my baseline model was not the best, but definitely passable, with an accuracy of 0.64.
+
+---
 
 ## Final Model
 My final model used these features: `CLIMATE.REGION`,`RES.SALES`,`OUTAGE.DURATION`,`CUSTOMERS.AFFECTED`, `MONTH`,`POPPCT_URBAN`,`TOTAL.PRICE`.
@@ -257,6 +264,8 @@ max_depth: 10
 min_samples_split: 20
 
 I used the accuracy score to measure the performance of my model. I got an accuracy of 0.814. Since the accuracy increased significantly from the baseline model to the final model, this demonstrates better performance of the final model.
+
+---
 
 ## Fairness Analysis
 My groups for the fairness analysis are longer vs shorter outages. This is defined as an anomaly that is greater than 0.0, vs that are less than 0.0.
@@ -278,5 +287,3 @@ The figure below shows the distribution of the statistic.
   height="600"
   frameborder="0"
 ></iframe>
-
-
