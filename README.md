@@ -89,7 +89,7 @@ Then, I wanted to see the average total electricity price across all outages to 
 
 I then wanted to see how the average total electricity price varied among the different states. *The black states have too few values to have a proper density.
 <iframe
-  src="assets/fairness_plot.html"
+  src="assets/geospatial_map.html"
   width="800"
   height="600"
   frameborder="0"
