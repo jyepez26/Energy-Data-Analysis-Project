@@ -225,4 +225,49 @@ Below, you can see the plot of the empirical distribution of the test statistic 
 ></iframe>
 
 ## Framing a Prediction Problem
+My model will be developed to predict the cause of a power outage. This will be a decision tree classification because we are trying to predict any of the different outages cause categories.
+
+The metric I am using to evaluate my model is the accuracy, because it gives a straightforward and easy to interpret score of my model. My model will consist of various features, and while there is some imbalance within the classes we are predicting, it is sometimes better to overcomplicate the scoring metric. When I used precision, recall, or the F1 score, I did not get too large of a difference in score, and therefore decided it was better to just keep it simpler.
+
+At the time of prediction, we will know the 'CLIMATE.REGION','RES.SALES','OUTAGE.DURATION','CUSTOMERS.AFFECTED', 'MONTH','POPPCT_URBAN','TOTAL.PRICE'. This information will allow us to predict what the cause of a major power outage is.
+
+
+## Baseline Model
+My model is a decision tree classifier using the features climate region, res sales, outage duration, poppct_urban to predict the cause of a major outage. This information would provide economists and policymakers with information on how certain geographical and economic factors impact the outages in their area.
+
+The features are: CLIMATE.REGION (nominal), RES.SALES (quantitative), OUTAGE.DURATION (quantitative), and POPPCT_URBAN (quantitative). I chose these specific features because CLIMATE.REGION indicates the geographic area that the outage occurred in, RES.SALES provides economic information about the electricity customers purchasing power, OUTAGE.DURATION to account for the severity of the outage, and POPPCT_URBAN since the areas where there is a higher urban population actually can lead to more negative impacts on the energy and power and therefore can lead to more major power outages caused by severe weather and other common causes. Also, I used RES.SALES since when demand for electricity exceeds the available supply, a controlled outage may be necessary.
+
+I used One Hot Encoding to convert the Climate Region to a quantitative column.
+
+The performance of my baseline model was not the best, but definitely passable, with an accuracy of 0.64.
+
+## Final Model
+My final model used these features: 'CLIMATE.REGION','RES.SALES','OUTAGE.DURATION','CUSTOMERS.AFFECTED', 'MONTH','POPPCT_URBAN','TOTAL.PRICE'.
+
+I added CUSTOMERS.AFFECTED (quantitative) as another measure of the severity of the outage. I included MONTH (ordinal) because many intentional attacks occur due to hot, dry days with sustained wind, and also severe weather outages are more likely during the winter due to snow, rain, and blizzards. TOTAL.PRICE (quantitative) is another specific economic feature that impacts the energy consumption, and therefore the type of outage that could occur.
+
+For the feature engineering, I used a custom binarizer to convert the month to either spring/summer or fall/winter, and to standardize the outage duration and customers affected.
+
+I used GridSearchCV, with the default cross validation of 5-fold, in order to find the best hyperparameters for the DecisionTreeClassifier. The best hyperparameters ended up being:
+
+criterion: entropy
+max_depth: 10
+min_samples_split: 20
+
+I used the accuracy score to measure the performance of my model. I got an accuracy of 0.814. Since the accuracy increased significantly from the baseline model to the final model, this demonstrates better performance of the final model.
+
+## Fairness Analysis
+My groups for the fairness analysis are longer vs shorter outages. This is defined as an anomaly that is greater than 0.0, vs that are less than 0.0.
+
+I decided on these groups because I was curious if the cause category (which is predicted by my model) would evaluate these differently.
+
+My evaluation metric will be accuracy score since it has been a good evaluation of my model. I will use permutation tests to calculate the accuracy score for higher vs lower anomaly levels (that are randomly shuffled) and then compare this absolute difference to my initial observed absolute difference.
+
+Null Hypothesis: The model is fair. Its accuracy scores for higher and lower anomalies are roughly the same, and any differences are due to random chance.
+
+Alternative Hypothesis: The model is unfair. Its accuracy score for higher anomalies is significantly different from the accuracy for lower ones.
+
+I performed a permutation test with 500 trials. My significance level is the standard 0.05, and I got a p_value of around 0.5 so I fail to reject the null hypothesis. Therefore, my model is fair between higher and lower anomaly levels.
+
+The figure below shows the distribution of the statistic.
 
