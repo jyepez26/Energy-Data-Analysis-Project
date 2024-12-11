@@ -40,7 +40,7 @@ The original DataFrame contains 1534 rows, each corresponding to a unique outage
 
 
 ## Data Cleaning and Exploratory Data Analysis
-### Data Cleaning
+### **Data Cleaning**
 The first step in my research is to clean the data, ensuring that it is formatted appropriately for proper exploration and analysis.
 
 Step 1:
@@ -67,7 +67,7 @@ The first few rows of the cleaned dataframe, titled "outages", are showed below:
 | 2015     | 7         | MN              | 2015-07-18 02:00:00   | 2015-07-19 07:00:00    | 1740                | 250000                | 250                | 1.2               | East North Central     | warm                 | severe weather       | 54431                | 5970339         | 10.43           | 292023            | 73.27            | 2028875     |
 
 
-### Exploratory Data Analysis
+### **Exploratory Data Analysis**
 
 ### Univariate Analysis
 To begin my exploratory data analysis, I performed a univariate analysis to understand the distributions of certain single properties.
