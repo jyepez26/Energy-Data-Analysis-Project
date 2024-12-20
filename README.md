@@ -2,6 +2,7 @@
 Project for DSC 80 at UCSD
 
 By Jonathan Yepez
+
 ---
 ## Introduction
 Throughout this project, I explored a dataset on major power outages in different states throughout the U.S. containing data from January 2000-July 2016. The dataset, containing fifty-five total variables, was accessed from Purdue University’s Laboratory on Advances in Sustainable Infrastructure, at the url https://engineering.purdue.edu/LASCI/research-data/outages/outagerisks. This dataset can be used to recognize and explore trends and patterns of the major outages in the U.S. as well as to identify and assess the risk predictors associated with varying power outages. The data also provide characteristics of the states in the U.S., including their climate and topographical characteristics, electricity consumption patterns, population, economic characteristics, and land-cover characteristics. 
@@ -291,7 +292,6 @@ The figure below shows the distribution of the statistic.
 ></iframe>
 
 ---
-
 ## Conclusion
 Throughout this project, I have been able to explore how power outages in the US are affected by different socioeconomic, geographic, and meteorological factors. My most notable takeaway is that economic status of an area can have a negative impact on how significant the impact of a power outage is. I enjoyed connecting my interest in economics with my data science knowledge through this project.
 ```
