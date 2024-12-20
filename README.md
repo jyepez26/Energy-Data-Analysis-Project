@@ -1,9 +1,8 @@
 <h1>Energy Data Analyis Project</h1>
 Project for DSC 80 at UCSD
+
 By Jonathan Yepez
-
 ---
-
 ## Introduction
 Throughout this project, I explored a dataset on major power outages in different states throughout the U.S. containing data from January 2000-July 2016. The dataset, containing fifty-five total variables, was accessed from Purdue University’s Laboratory on Advances in Sustainable Infrastructure, at the url https://engineering.purdue.edu/LASCI/research-data/outages/outagerisks. This dataset can be used to recognize and explore trends and patterns of the major outages in the U.S. as well as to identify and assess the risk predictors associated with varying power outages. The data also provide characteristics of the states in the U.S., including their climate and topographical characteristics, electricity consumption patterns, population, economic characteristics, and land-cover characteristics. 
 
