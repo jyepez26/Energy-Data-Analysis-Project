@@ -56,15 +56,16 @@ Step 3:
 
 My last step was to check the extent of outages columns, `OUTAGE.DURATION`, `CUSTOMERS.AFFECTED`, and `DEMAND.LOSS.MW`, for values of 0. It is very unlikely that any of these values will be reported zero, as a power outage will have to last some duration of time, which in turn leads to peak demand being lost and customers being impacted. Therefore, a value of 0 in these features would be suggestive of a missing value, and I will replace these values with np.nan instead.
 
-The first few rows of the cleaned dataframe, titled "outages", are showed below:
+The first few rows and columns of the cleaned dataframe, titled "outages", are showed below:
 
-| **YEAR** | **MONTH** | **POSTAL.CODE** | **OUTAGE.START**      | **OUTAGE.RESTORATION** | **OUTAGE.DURATION** | **CUSTOMERS.AFFECTED** | **DEMAND.LOSS.MW** | **ANOMALY.LEVEL** | **CLIMATE.REGION**     | **CLIMATE.CATEGORY** | **CAUSE.CATEGORY**    | **PC.REALGSP.STATE** | **TOTAL.SALES** | **TOTAL.PRICE** | **TOTAL.REALGSP** | **POPPCT_URBAN** | **RES.SALES** |
-|----------|-----------|-----------------|-----------------------|------------------------|---------------------|-----------------------|--------------------|-------------------|-----------------------|----------------------|----------------------|----------------------|-----------------|-----------------|-------------------|------------------|--------------|
-| 2011     | 7         | MN              | 2011-07-01 17:00:00   | 2011-07-03 20:00:00    | 3060                | 70000                 | NaN                | -0.3              | East North Central     | normal               | severe weather       | 51268                | 6562520         | 9.28            | 274182            | 73.27            | 2332915     |
-| 2014     | 5         | MN              | 2014-05-11 18:38:00   | 2014-05-11 18:39:00    | 1                   | NaN                   | NaN                | -0.1              | East North Central     | normal               | intentional attack   | 53499                | 5284231         | 9.28            | 291955            | 73.27            | 1586986     |
-| 2010     | 10        | MN              | 2010-10-26 20:00:00   | 2010-10-28 22:00:00    | 3000                | 70000                 | NaN                | -1.5              | East North Central     | cold                 | severe weather       | 50447                | 5222116         | 8.15            | 267895            | 73.27            | 1467293     |
-| 2012     | 6         | MN              | 2012-06-19 04:30:00   | 2012-06-20 23:00:00    | 2550                | 68200                 | NaN                | -0.1              | East North Central     | normal               | severe weather       | 51598                | 5787064         | 9.19            | 277627            | 73.27            | 1851519     |
-| 2015     | 7         | MN              | 2015-07-18 02:00:00   | 2015-07-19 07:00:00    | 1740                | 250000                | 250                | 1.2               | East North Central     | warm                 | severe weather       | 54431                | 5970339         | 10.43           | 292023            | 73.27            | 2028875     |
+| **YEAR** | **MONTH** | **POSTAL.CODE** | **OUTAGE.START**      | **OUTAGE.RESTORATION** | **OUTAGE.DURATION** | **CUSTOMERS.AFFECTED** |
+|----------|-----------|-----------------|-----------------------|------------------------|---------------------|-----------------------|
+| 2011     | 7         | MN              | 2011-07-01 17:00:00   | 2011-07-03 20:00:00    | 3060                | 70000                 |
+| 2014     | 5         | MN              | 2014-05-11 18:38:00   | 2014-05-11 18:39:00    | 1                   | NaN                   |
+| 2010     | 10        | MN              | 2010-10-26 20:00:00   | 2010-10-28 22:00:00    | 3000                | 70000                 |
+| 2012     | 6         | MN              | 2012-06-19 04:30:00   | 2012-06-20 23:00:00    | 2550                | 68200                 |
+| 2015     | 7         | MN              | 2015-07-18 02:00:00   | 2015-07-19 07:00:00    | 1740                | 250000                |
+
 
 
 ### **Exploratory Data Analysis**
@@ -131,6 +132,23 @@ For the aggregation, I wanted to begin to explore some geographical features. Th
 | **Southwest**          | 113.8                 | 76                        | 274.678                | 2             | 2,275             | 11,572.9           | 370.375                          |
 | **West**               | 524.81                | 6,154.6                   | 886.267                | 214.857       | 2,028.11          | 2,928.37           | 363.667                          |
 | **West North Central** | 61                    | NaN                       | 47                     | 68.2          | 439.5             | 2,442.5            | NaN                              |
+
+
+---
+
+
+| `CLIMATE.CATEGORY`    | **equipment failure** | **fuel supply emergency** | **intentional attack** | **islanding** | **public appeal** | **severe weather** | **system operability disruption** |
+|:--------------------:|:---------------------:|:-------------------------:|:----------------------:|:-------------:|:-----------------:|:------------------:|:--------------------------------:|
+|    `CLIMATE.REGION`    |                       |                           |                        |               |                   |                    |                                  |
+| **Central**          | 322                   | 10,035.2                  | 490.25                 | 125.333       | 1,410             | 3,299.63           | 2,695.2                          |
+| **East North Central** | 26,435.3            | 33,971.2                  | 2,501.11               | 1             | 733               | 4,434.82           | 2,610                            |
+| **Northeast**        | 269.75                | 14,629.6                  | 264.68                 | 881           | 2,655             | 4,429.9            | 773.5                            |
+| **Northwest**        | 702                   | 1                         | 488.831                | 73.3333       | 898               | 4,838              | 141                              |
+| **South**            | 295.778               | 17,482.5                  | 337.667                | 493.5         | 1,163.98          | 4,391.35           | 899.385                          |
+| **Southeast**        | 554.5                 | NaN                       | 504.667                | NaN           | 2,865.4           | 2,685.71           | 180.6                            |
+| **Southwest**        | 113.8                 | 76                        | 274.678                | 2             | 2,275             | 11,572.9           | 370.375                          |
+| **West**             | 524.81                | 6,154.6                   | 886.267                | 214.857       | 2,028.11          | 2,928.37           | 363.667                          |
+| **West North Central** | 61                  | NaN                       | 47                     | 68.2          | 439.5             | 2,442.5            | NaN                              |
 
 
 ---
