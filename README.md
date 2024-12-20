@@ -121,22 +121,6 @@ Next, I was interested to see how the number of customers affected by an outage 
 ### Aggregation
 For the aggregation, I wanted to begin to explore some geographical features. Therefore, I created a pivot table which aggregated the mean Outage Duration based on the Climate Region and the Cause Category. More simply, this pivot table shows the average duration of outages in each climate region for each cause category.
 
-| `CLIMATE.REGION`    | **equipment failure** | **fuel supply emergency** | **intentional attack** | **islanding** | **public appeal** | **severe weather** | **system operability disruption** |
-|:----------------------:|:---------------------:|:-------------------------:|:----------------------:|:-------------:|:-----------------:|:------------------:|:--------------------------------:|
-| **Central**            | 322                   | 10,035.2                  | 490.25                 | 125.333       | 1,410             | 3,299.63           | 2,695.2                          |
-| **East North Central** | 26,435.3              | 33,971.2                  | 2,501.11               | 1             | 733               | 4,434.82           | 2,610                            |
-| **Northeast**          | 269.75                | 14,629.6                  | 264.68                 | 881           | 2,655             | 4,429.9            | 773.5                            |
-| **Northwest**          | 702                   | 1                         | 488.831                | 73.3333       | 898               | 4,838              | 141                              |
-| **South**              | 295.778               | 17,482.5                  | 337.667                | 493.5         | 1,163.98          | 4,391.35           | 899.385                          |
-| **Southeast**          | 554.5                 | NaN                       | 504.667                | NaN           | 2,865.4           | 2,685.71           | 180.6                            |
-| **Southwest**          | 113.8                 | 76                        | 274.678                | 2             | 2,275             | 11,572.9           | 370.375                          |
-| **West**               | 524.81                | 6,154.6                   | 886.267                | 214.857       | 2,028.11          | 2,928.37           | 363.667                          |
-| **West North Central** | 61                    | NaN                       | 47                     | 68.2          | 439.5             | 2,442.5            | NaN                              |
-
-
----
-
-
 | `CLIMATE.CATEGORY`    | **equipment failure** | **fuel supply emergency** | **intentional attack** | **islanding** | **public appeal** | **severe weather** | **system operability disruption** |
 |:--------------------:|:---------------------:|:-------------------------:|:----------------------:|:-------------:|:-----------------:|:------------------:|:--------------------------------:|
 |    **`CLIMATE.REGION`**    |                       |                           |                        |               |                   |                    |                                  |
@@ -296,7 +280,7 @@ Null Hypothesis: The model is fair. Its accuracy scores for higher and lower ano
 
 Alternative Hypothesis: The model is unfair. Its accuracy score for higher anomalies is significantly different from the accuracy for lower ones.
 
-I performed a permutation test with 500 trials. My significance level is the standard 0.05, and I got a p_value of around 0.5 so I fail to reject the null hypothesis. Therefore, my model is fair between higher and lower anomaly levels.
+I performed a permutation test with 500 trials. My significance level is the standard 0.05, and I got a p value of around 0.5 so I fail to reject the null hypothesis. Therefore, my model is fair between higher and lower anomaly levels.
 
 The figure below shows the distribution of the statistic.
 <iframe
@@ -305,3 +289,11 @@ The figure below shows the distribution of the statistic.
   height="600"
   frameborder="0"
 ></iframe>
+
+---
+
+## Conclusion
+Throughout this project, I have been able to explore how power outages in the US are affected by different socioeconomic, geographic, and meteorological factors. My most notable takeaway is that economic status of an area can have a negative impact on how significant the impact of a power outage is. I enjoyed connecting my interest in economics with my data science knowledge through this project.
+```
+Thank you for taking the time to look through my research!
+```
