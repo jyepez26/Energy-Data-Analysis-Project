@@ -137,9 +137,9 @@ For the aggregation, I wanted to begin to explore some geographical features. Th
 ---
 
 
-| `CLIMATE.CATEGORY`    | **equipment failure** | **fuel supply emergency** | **intentional attack** | **islanding** | **public appeal** | **severe weather** | **system operability disruption** |
+| `**CLIMATE.CATEGORY**`    | **equipment failure** | **fuel supply emergency** | **intentional attack** | **islanding** | **public appeal** | **severe weather** | **system operability disruption** |
+|    `**CLIMATE.REGION**`    |                       |                           |                        |               |                   |                    |                                  |
 |:--------------------:|:---------------------:|:-------------------------:|:----------------------:|:-------------:|:-----------------:|:------------------:|:--------------------------------:|
-|    `CLIMATE.REGION`    |                       |                           |                        |               |                   |                    |                                  |
 | **Central**          | 322                   | 10,035.2                  | 490.25                 | 125.333       | 1,410             | 3,299.63           | 2,695.2                          |
 | **East North Central** | 26,435.3            | 33,971.2                  | 2,501.11               | 1             | 733               | 4,434.82           | 2,610                            |
 | **Northeast**        | 269.75                | 14,629.6                  | 264.68                 | 881           | 2,655             | 4,429.9            | 773.5                            |
