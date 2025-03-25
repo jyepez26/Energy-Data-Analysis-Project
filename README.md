@@ -293,7 +293,7 @@ The figure below shows the distribution of the statistic.
 
 ---
 ## Conclusion
-Throughout this project, I have been able to explore how power outages in the US are affected by different socioeconomic, geographic, and meteorological factors. My most notable takeaway is that economic status of an area can have a negative impact on how significant the impact of a power outage is. I enjoyed connecting my interest in economics with my data science knowledge through this project.
+Throughout this project, I have been able to explore how power outages in the US are affected by different socioeconomic, geographic, and meteorological factors. My most notable takeaway is that economic status of an area can have a negative impact on how significant the impact of a power outage is. I enjoyed connecting my interest in economics and climate/weather with my data science knowledge through this project.
 ```
 Thank you for taking the time to look through my research!
 ```
