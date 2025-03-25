@@ -104,7 +104,7 @@ For the next step in my exploratory data analysis, I conducted a bivariate analy
 
 To continue to explore various economic characteristics, I wanted to see how the per capita real gross state product–a state’s total output measured per person–varied among different states. There was a notable difference between Washington D.C. and every other state, which stems from the miniscule population size, low variance, and the government’s actions counting as contributions to their GSP.
 <iframe
-  src="assets/customers_per_gsp_dist.html"
+  src="assets/gsp_per_state.html"
   width="800"
   height="600"
   frameborder="0"
@@ -112,7 +112,7 @@ To continue to explore various economic characteristics, I wanted to see how the
 
 Next, I was interested to see how the number of customers affected by an outage was impacted by the total real gross state product of the state in which the outage occurred. There was no apparent pattern here, which surprised me a bit; initially I thought there would be a higher amount of customers affected for the lower GSP values, due to the state not having as many resources to reduce the impacts of an outage. *I separated the points by the climate region where the outage occurred, just to make the points more visually understandable. This extra step did seem to reveal that the West climate region tends to have a high total GSP value, which is an interesting note. 
 <iframe
-  src="assets/gsp_per_state.html"
+  src="assets/customers_per_gsp_dist.html"
   width="800"
   height="600"
   frameborder="0"
